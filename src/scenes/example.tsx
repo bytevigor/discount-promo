@@ -16,7 +16,7 @@ export default makeScene2D(function* (view) {
   const colorOverlayRef = createRef<Rect>();
   const imageRef = createRef<Img>();
   // https://www.amazon.com/dp/B0D4591J6K
-  yield view.add(
+  view.add(
     <>
       <Img
         ref={imageRef}
@@ -32,12 +32,12 @@ export default makeScene2D(function* (view) {
     </>
   );
   yield* imageRef().scale(1, 3, easeInOutCubic);
-  yield* waitFor(2);
-  yield* colorOverlayRef().fill('rgba(0, 0, 0, 0.25)', 1, easeInOutCubic);
+  yield* waitFor(1);
+  yield* colorOverlayRef().fill('rgba(0, 0, 0, 0.25)', 0.5, easeInOutCubic);
 
   const discountRef = createRef<Rect>();
   const discountSignal = createSignal(0);
-  yield view.add(
+  view.add(
     <Rect
       ref={discountRef}
       rotation={-15}
@@ -65,7 +65,7 @@ export default makeScene2D(function* (view) {
 
   const storeNameRef = createRef<Txt>();
   const logoRef = createRef<Img>();
-  yield view.add(
+  view.add(
     <>
       <Img
         src={shopifyLogo}
@@ -92,5 +92,5 @@ export default makeScene2D(function* (view) {
     storeNameRef().position([0, 650], 1, easeInOutCubic)
   );
 
-  yield* waitFor(3);
+  yield* waitFor(2);
 });

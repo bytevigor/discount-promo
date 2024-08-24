@@ -5,13 +5,14 @@ import {
   createRef,
   createSignal,
   easeInOutCubic,
+  useScene,
   waitFor,
 } from '@revideo/core';
 import shopifyLogo from '../assets/shopify-logo.svg';
 
 export default makeScene2D(function* (view) {
-  const discountValue = 25;
-  const storeName = 'Acme Store';
+  const discountValue = useScene().variables.get('discount', 25)();
+  const storeName = useScene().variables.get('store', 'TrendTide')();
 
   const colorOverlayRef = createRef<Rect>();
   const imageRef = createRef<Img>();
@@ -45,7 +46,7 @@ export default makeScene2D(function* (view) {
       opacity={0}
       fill={'rgba(255, 223, 0, 1)'}
       size={[200, 85]}
-      position={[150, -400]}
+      position={[150, -300]}
     >
       <Txt
         text={() => `-${discountSignal().toFixed()}%`}
@@ -81,15 +82,15 @@ export default makeScene2D(function* (view) {
         ref={storeNameRef}
         position={[0, 1000]}
         text={storeName}
-        fontSize={100}
+        fontSize={80}
         fill={'rgba(255, 223, 01, 1)'}
         fontWeight={600}
       />
     </>
   );
   yield* chain(
-    logoRef().position([0, 400], 1, easeInOutCubic),
-    storeNameRef().position([0, 650], 1, easeInOutCubic)
+    logoRef().position([0, 200], 1, easeInOutCubic),
+    storeNameRef().position([0, 400], 1, easeInOutCubic)
   );
 
   yield* waitFor(2);

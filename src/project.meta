@@ -22,10 +22,7 @@
     "colorSpace": "srgb",
     "exporter": {
       "name": "@revideo/core/wasm",
-      "options": {
-        "fastStart": true,
-        "includeAudio": true
-      }
+      "options": {}
     }
   }
 }

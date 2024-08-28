@@ -4,27 +4,28 @@ import {
   chain,
   createRef,
   createSignal,
-  easeInOutCubic,
   useScene,
   waitFor,
 } from '@revideo/core';
 import shopifyLogo from '../assets/shopify-logo.svg';
 
 export default makeScene2D(function* (view) {
+  // Configurable parameters
+  const image = useScene().variables.get(
+    'image',
+    'https://m.media-amazon.com/images/I/81HIsr9OxcL._AC_SY879_.jpg'
+  );
   const discountValue = useScene().variables.get('discount', 25)();
   const storeName = useScene().variables.get('store', 'TrendTide')();
 
+  // First phase code
+  // Define reference variables
   const colorOverlayRef = createRef<Rect>();
   const imageRef = createRef<Img>();
-  // https://www.amazon.com/dp/B0D4591J6K
+  // Add image and color overlay
   view.add(
     <>
-      <Img
-        ref={imageRef}
-        width={'110%'}
-        scale={3}
-        src={'https://m.media-amazon.com/images/I/81HIsr9OxcL._AC_SY879_.jpg'}
-      />
+      <Img ref={imageRef} width={'100%'} scale={3} src={image} />
       <Rect
         ref={colorOverlayRef}
         size={['100%', '100%']}
@@ -32,12 +33,16 @@ export default makeScene2D(function* (view) {
       />
     </>
   );
-  yield* imageRef().scale(1, 3, easeInOutCubic);
+  // Animation sequence
+  yield* imageRef().scale(1, 3);
   yield* waitFor(1);
-  yield* colorOverlayRef().fill('rgba(0, 0, 0, 0.25)', 0.5, easeInOutCubic);
+  yield* colorOverlayRef().fill('rgba(0, 0, 0, 0.25)', 0.5);
 
+  // Second phase code
+  // Define reference variable and signal
   const discountRef = createRef<Rect>();
   const discountSignal = createSignal(0);
+  // Add discount elements
   view.add(
     <Rect
       ref={discountRef}
@@ -58,14 +63,18 @@ export default makeScene2D(function* (view) {
       />
     </Rect>
   );
+  // Animation sequence
   yield* all(
-    discountRef().scale(2.6, 0.5, easeInOutCubic),
-    discountRef().opacity(1, 0.5, easeInOutCubic),
+    discountRef().scale(2.6, 0.5),
+    discountRef().opacity(1, 0.5),
     discountSignal(discountValue, 2)
   );
 
+  // Third phase code
+  // Define reference variables
   const storeNameRef = createRef<Txt>();
   const logoRef = createRef<Img>();
+  // Add store name and logo
   view.add(
     <>
       <Img
@@ -88,10 +97,10 @@ export default makeScene2D(function* (view) {
       />
     </>
   );
+  // Animation sequence
   yield* chain(
-    logoRef().position([0, 200], 1, easeInOutCubic),
-    storeNameRef().position([0, 400], 1, easeInOutCubic)
+    logoRef().position([0, 150], 1),
+    storeNameRef().position([0, 300], 1)
   );
-
   yield* waitFor(2);
 });

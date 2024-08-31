@@ -34,3 +34,7 @@ To start a render API server:
 ```sh
 npx revideo serve --project ./src/project.ts --port 3000
 ```
+
+## Video Effects Preview in the Editor
+
+![video preview](./doc/editor_view.png)

@@ -14,7 +14,7 @@ export default makeScene2D(function* (view) {
   const image = useScene().variables.get(
     'image',
     'https://m.media-amazon.com/images/I/81HIsr9OxcL._AC_SY879_.jpg'
-  );
+  )();
   const discountValue = useScene().variables.get('discount', 25)();
   const storeName = useScene().variables.get('store', 'TrendTide')();
 

@@ -37,4 +37,4 @@ npx revideo serve --project ./src/project.ts --port 3000
 
 ## Video Effects Preview in the Editor
 
-![video preview](./doc/editor_view.png)
+![video preview](./doc/video_preview.jpg)

@@ -18,7 +18,7 @@ export default makeScene2D(function* (view) {
   const discountValue = useScene().variables.get('discount', 25)();
   const storeName = useScene().variables.get('store', 'TrendTide')();
 
-  // First phase code
+  // First stage
   // Define reference variables
   const colorOverlayRef = createRef<Rect>();
   const imageRef = createRef<Img>();
@@ -38,7 +38,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1);
   yield* colorOverlayRef().fill('rgba(0, 0, 0, 0.25)', 0.5);
 
-  // Second phase code
+  // Second stage
   // Define reference variable and signal
   const discountRef = createRef<Rect>();
   const discountSignal = createSignal(0);
@@ -70,7 +70,7 @@ export default makeScene2D(function* (view) {
     discountSignal(discountValue, 2)
   );
 
-  // Third phase code
+  // Third stage
   // Define reference variables
   const storeNameRef = createRef<Txt>();
   const logoRef = createRef<Img>();
